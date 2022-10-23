@@ -522,7 +522,10 @@ function Application(options) {
 			ctx.fillText('Also use can use arrow keys and mouse', 230,240);
 		}
 		ctx.fillStyle = 'green';
-		ctx.fillText('Press Enter to start the game!', 220,350);
+		if (isTouch)
+			ctx.fillText('Touch screen to start the game!', 220,350);
+		else
+			ctx.fillText('Press Enter to start the game!', 220,350);
 	};
 	var _renderGameScene = function() {
 		_renderGround();
@@ -549,7 +552,10 @@ function Application(options) {
 			ctx.fillStyle = pascalColors[9];
 			ctx.fillText('Rank: '+zoid.rank, 240,270);
 			ctx.fillStyle = 'green';
-			ctx.fillText('Press Enter to retry', 240,330);
+			if (isTouch)
+				ctx.fillText('Touch screen to retry', 240,330);
+			else
+				ctx.fillText('Press Enter to retry', 240,330);
 		}
 	};
 	var _renderScene = function() {
