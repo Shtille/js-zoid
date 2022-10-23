@@ -268,7 +268,13 @@ function Application(options) {
 		}
 	};
 	var _prepare = function() {
-		ctx.clearRect(0, 0, backCanvas.width, backCanvas.height);
+		if (isTouch) {
+			// On mobile devices background might be white
+			ctx.fillStyle = 'black';
+			ctx.fillRect(0,0,640,480);
+		} else {
+			ctx.clearRect(0, 0, backCanvas.width, backCanvas.height);
+		}
 	};
 	var _setColor = function(c) {
 		ctx.strokeStyle = pascalColors[c];
