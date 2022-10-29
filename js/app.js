@@ -10,6 +10,7 @@ function Application(options) {
 	backCanvas.height = mainCanvas.height;
 	const ctx = backCanvas.getContext('2d', {alpha: false});
 	ctx.font = "14px serif";
+	var screenshotId = 0;
 
 	function isTouchDevice() {
 		return (('ontouchstart' in window) ||
@@ -580,6 +581,9 @@ function Application(options) {
 		_present();
 	};
 	this.onKeyDown = function(event) {
+		if (event.code === 'KeyT') {
+			this.takeScreenshot();
+		}
 		if (scene == Scenes.kInitial) {
 			if (event.code === 'Enter') {
 				// Next scene
@@ -653,5 +657,15 @@ function Application(options) {
 	this.onMouseUp = function(event) {
 	};
 	this.onMouseMove = function(event) {
+	};
+	this.takeScreenshot = function() {
+		++screenshotId;
+		var filename = 'zoid-scr-'+screenshotId+'.png';
+		var data = mainCanvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+		var a = document.createElement('a');
+		a.href = data;
+		a.download = filename;
+		a.click();
+		URL.revokeObjectURL(a.href);
 	};
 }
